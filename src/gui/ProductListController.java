@@ -1,9 +1,12 @@
 package gui;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,8 +15,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.entities.Product;
+import model.services.ProductService;
 
 public class ProductListController implements Initializable {
+	
+	private ProductService service;
 	
 	// referência para a tableView
 	@FXML
@@ -28,11 +34,18 @@ public class ProductListController implements Initializable {
 	@FXML
 	private Button btNovo;
 	
+	// será associado ao tableView para os produtos aparecerem na tela
+	
+	private ObservableList<Product> obsList;
+	
 	@FXML 
 	public void onBtNovoAction() {
 		System.out.println("onBtnovoAction");
 	}
 
+	public void setProductService(ProductService service) {
+		this.service = service;
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -50,6 +63,15 @@ public class ProductListController implements Initializable {
 		
 		//faz com o que o tableView acompanhe o tamanho da janela
 		tableViewProduct.prefHeightProperty().bind(stage.heightProperty());
+	}
+	
+	public void updateTableView() {
+		if (service == null) {
+			throw new IllegalStateException("Service was null");
+		}
+		List<Product> list = service.findAll();	
+		obsList = FXCollections.observableArrayList(list);
+		tableViewProduct.setItems(obsList);
 	}
 
 }

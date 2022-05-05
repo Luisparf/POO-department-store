@@ -9,12 +9,14 @@ public class Product implements Serializable {
 	private Integer id;
 	private String name;
 	
+	
 	public Product() {
 	}
 
 	public Product(Integer id, String name) {
 		this.id = id;
 		this.name = name;
+		
 	}
 
 	public Integer getId() {
