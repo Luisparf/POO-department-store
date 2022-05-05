@@ -24,7 +24,7 @@
         <items>
             <ButtonBar>
                <buttons>
-                <Button fx:id="btNovo" mnemonicParsing="false" onAction="#onBtNovoAction" text="Novo" />
+                <Button fx:id="btNew" mnemonicParsing="false" onAction="#onBtNewAction" text="Novo" />
                </buttons>
             </ButtonBar>
         </items>

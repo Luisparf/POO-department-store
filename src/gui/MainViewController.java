@@ -17,7 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import model.services.ProductService;
-
+import java.awt.event.ActionEvent;
 
 public class MainViewController implements Initializable {
 	
@@ -27,6 +27,8 @@ public class MainViewController implements Initializable {
 	private MenuItem menuItemProduto;
 	@FXML
 	private MenuItem menuItemAbout;
+	
+		
 	
 	@FXML	
 	public void onMenuItemFuncionarioAction() {
@@ -73,7 +75,7 @@ public class MainViewController implements Initializable {
 			mainVBox.getChildren().addAll(newVBox.getChildren()); // adiciona uma coleção, os 'filhos' de VBox
 			
 			// executam a função passada como argumento:
-			T controller = loader.getController();
+			T controller = loader.getController();	
 			initializingAction.accept(controller);
 			
 		}
