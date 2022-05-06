@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Utils;
 import javafx.collections.FXCollections;
@@ -26,7 +27,7 @@ import javafx.stage.Stage;
 import model.entities.Product;
 import model.services.ProductService;
 
-public class ProductListController implements Initializable {
+public class ProductListController implements Initializable, DataChangeListener{
 	
 	private ProductService service;
 	
@@ -50,7 +51,8 @@ public class ProductListController implements Initializable {
 	@FXML 
 	public void onBtNewAction(ActionEvent event) {	
 		Stage parentStage = Utils.currentStage(event);
-		createDialogForm("/gui/ProductForm.fxml", parentStage);
+		Product obj = new Product();
+		createDialogForm(obj, "/gui/ProductForm.fxml", parentStage);
 		System.out.println("onBtnovoAction");
 	}
 
@@ -86,10 +88,17 @@ public class ProductListController implements Initializable {
 	}
 	
 
-	private void createDialogForm(String absoluteName, Stage parentStage) {
+	private void createDialogForm(Product obj, String absoluteName, Stage parentStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName)); 
 			Pane pane = loader.load();
+			
+			ProductFormController controller = loader.getController();
+			controller.setProduct(obj);
+			controller.setProductService(new ProductService());
+			controller.subscribeDataChangeListener(this);
+			controller.updateFormData();
+			
 					
 			// instanciar novo stage
 			Stage dialogStage = new Stage();
@@ -104,6 +113,13 @@ public class ProductListController implements Initializable {
 		catch (IOException e) {
 			Alerts.showAlert("Io Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
+	}
+
+	
+	@Override
+	public void onDataChanged() {
+		updateTableView();
+		
 	}
 
 }

@@ -13,4 +13,12 @@ public class ProductService {
 	public List<Product> findAll(){
 		return dao.findAll();
 	}
+	
+	public void saveOrUpdate(Product obj) {
+		if (obj.getId() == null) {
+			dao.insert(obj); // se o objeto não esta cadastrado, insere
+		}else {
+			dao.update(obj); // se não, atualiza
+		}
+	}
 }
