@@ -145,7 +145,7 @@ public class FuncionarioDaoJDBC implements FuncionarioDao {
 		obj.setName(rs.getString("Name"));
 		obj.setEmail(rs.getString("Email"));
 		obj.setBaseSalary(rs.getDouble("BaseSalary"));
-		obj.setBirthDate(rs.getDate("BirthDate"));
+		obj.setBirthDate(new java.util.Date(rs.getTimestamp("BirthDate").getTime()));
 		obj.setDepartment(prod);
 		return obj;
 	}
@@ -179,7 +179,7 @@ public class FuncionarioDaoJDBC implements FuncionarioDao {
 				
 				if (prod == null) {
 					prod = instantiateProduct(rs);
-					map.put(rs.getInt("DepartmentId"), prod);
+					map.put(rs.getInt("ProductId"), prod);
 				}
 				
 				Funcionario obj = instantiateFuncionario(rs, prod);

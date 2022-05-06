@@ -16,8 +16,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import model.services.FuncionarioService;
 import model.services.ProductService;
-import java.awt.event.ActionEvent;
 
 public class MainViewController implements Initializable {
 	
@@ -32,7 +32,11 @@ public class MainViewController implements Initializable {
 	
 	@FXML	
 	public void onMenuItemFuncionarioAction() {
-		System.out.println("onMenuItemFuncionarioAction");
+		loadView("/gui/FuncionarioList.fxml", (FuncionarioListController controller) -> {
+			controller.setFuncionarioService(new FuncionarioService());
+			controller.updateTableView();
+		}); // ação de inicialização como parâmetro
+		
 	}
 	
 	@FXML	
@@ -41,14 +45,14 @@ public class MainViewController implements Initializable {
 			controller.setProductService(new ProductService());
 			controller.updateTableView();
 		}); // ação de inicialização como parâmetro
-		System.out.println("onMenuItemProdutoAction");
+		
 	}
 	
 
 	@FXML	
 	public void onMenuItemSobreAction() {
 		loadView("/gui/About.fxml", x -> {});
-		System.out.println("onMenuSobreAction");
+		
 	}
 
 	@Override
