@@ -42,7 +42,7 @@ public class FuncionarioDaoJDBC implements FuncionarioDao {
 			st.setString(2, obj.getEmail());
 			st.setDate(3, new java.sql.Date(obj.getBirthDate().getTime()));
 			st.setDouble(4, obj.getBaseSalary());
-			st.setInt(5, obj.getProduct().getId());
+			st.setInt(5, 1);
 			
 			int rowsAffected = st.executeUpdate();
 			

@@ -132,17 +132,17 @@ public class FuncionarioFormController implements Initializable {
 		obj.setId(Utils.tryParseToInt(txtId.getText()));
 
 		if (txtName.getText() == null || txtName.getText().trim().equals("")) {
-			exception.addError("name", "Field can't be empty");
+			exception.addError("name", "O campo não pode ser vazio!");
 		}
 		obj.setName(txtName.getText());
 
 		if (txtEmail.getText() == null || txtEmail.getText().trim().equals("")) {
-			exception.addError("email", "Field can't be empty");
+			exception.addError("email", "O campo não pode ser vazio!");
 		}
 		obj.setEmail(txtEmail.getText());
 		
 		if (dpBirthDate.getValue() == null) {
-			exception.addError("birthDate", "Field can't be empty");
+			exception.addError("birthDate", "O campo não pode ser vazio!");
 		}
 		else {
 			Instant instant = Instant.from(dpBirthDate.getValue().atStartOfDay(ZoneId.systemDefault()));
@@ -150,7 +150,7 @@ public class FuncionarioFormController implements Initializable {
 		}
 		
 		if (txtBaseSalary.getText() == null || txtBaseSalary.getText().trim().equals("")) {
-			exception.addError("baseSalary", "Field can't be empty");
+			exception.addError("baseSalary", "O campo não pode ser vazio!	");
 		}
 		obj.setBaseSalary(Utils.tryParseToDouble(txtBaseSalary.getText()));
 		
@@ -207,11 +207,12 @@ public class FuncionarioFormController implements Initializable {
 		}
 		List<Product> list = productService.findAll();
 		obsList = FXCollections.observableArrayList(list);
-		// comboBoxProduct.setItems(obsList);
+		//comboBoxProduct.setItems(obsList);
 	}
 
 	private void setErrorMessages(Map<String, String> errors) {
 		Set<String> fields = errors.keySet();
+
 
 		labelErrorName.setText((fields.contains("name") ? errors.get("name") : ""));
 		labelErrorEmail.setText((fields.contains("email") ? errors.get("email") : ""));
