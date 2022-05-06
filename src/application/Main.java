@@ -28,7 +28,7 @@ public class Main extends Application {
 			mainScene = new Scene(scrollPane);
 			// primaryStage é o "palco" da cena
 			primaryStage.setScene(mainScene); // seta como a cena principal
-			primaryStage.setTitle("Registro de produtos");
+			primaryStage.setTitle("Loja");
 			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
